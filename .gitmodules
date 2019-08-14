@@ -1,0 +1,3 @@
+[submodule "lib/kinetis-sdk/kinetis-sdk-mk8x"]
+	path = lib/kinetis-sdk/kinetis-sdk-mk8x
+	url = git@github.com:cargodog/kinetis-sdk-mk8x.git
