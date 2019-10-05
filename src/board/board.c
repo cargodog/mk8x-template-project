@@ -5,7 +5,6 @@
 #include "clock_config.h"
 #include "fsl_port.h"
 #include "fsl_gpio.h"
-#include "fsl_debug_console.h"
 
 
 #define INITIALIZE_GPIO_PIN(id, direction, polarity) \
@@ -47,11 +46,6 @@ void board_init(void)
     clkcfg_run_default();
     initialize_pinmux();
     initialize_gpios();
-
-    // Setup debug console
-    CLOCK_SetLpuartClock(2);
-    DbgConsole_Init(0U, BOARD_DEBUG_UART_BAUDRATE,
-                    kSerialPort_Uart, CLOCK_GetOsc0ErClkFreq());
 }
 
 void board_gpio_set(PinID_t pin)

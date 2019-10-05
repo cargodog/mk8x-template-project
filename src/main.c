@@ -1,6 +1,5 @@
 #include "board.h"
 #include "fsl_clock.h"
-#include "fsl_debug_console.h"
 
 
 uint32_t ms_to_ticks(uint32_t ms)
@@ -22,10 +21,8 @@ int main(void)
 {
     board_init();
 
-    PRINTF("Hello, World!\r\n");
     while(1) {
         board_status_led_toggle();
         delay_ms(1000);
-        PRINTF("blink...\n\r");
     }
 }
