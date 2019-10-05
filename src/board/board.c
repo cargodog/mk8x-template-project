@@ -3,6 +3,7 @@
 #include "pinmux_cfg.h"
 #include "gpio_cfg.h"
 #include "clock_config.h"
+#include "printf_port.h"
 #include "fsl_port.h"
 #include "fsl_gpio.h"
 
@@ -46,6 +47,7 @@ void board_init(void)
     clkcfg_run_default();
     initialize_pinmux();
     initialize_gpios();
+    initialize_debug_uart();
 }
 
 void board_gpio_set(PinID_t pin)

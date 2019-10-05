@@ -1,4 +1,5 @@
 #include "board.h"
+#include "printf.h"
 #include "fsl_clock.h"
 
 
@@ -21,8 +22,11 @@ int main(void)
 {
     board_init();
 
+    printf("Hello, World!\n\r");
+
     while(1) {
         board_status_led_toggle();
         delay_ms(1000);
+        printf("Blink!\n\r");
     }
 }
