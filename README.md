@@ -5,6 +5,7 @@ This project is intended to serve as a template firmware project for the Kinetis
 1) GNU ARM GCC toolchain ([download](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm))
 1) cmake >= v3.12
 1) Kinetis MK8x SDK (included as git submodule)
+1) MPaland `printf` lib (included as git submodule)
 
 ## Build
 1) Update all submodules
