@@ -4,3 +4,6 @@
 [submodule "lib/printf/printf"]
 	path = lib/printf/printf
 	url = git@github.com:mpaland/printf.git
+[submodule "lib/microcli/microcli"]
+	path = lib/microcli/microcli
+	url = git@github.com:cargodog/microcli.git
