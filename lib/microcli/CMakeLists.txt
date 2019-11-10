@@ -7,5 +7,6 @@ list(APPEND kinets_firmware_SOURCES
 
 # Subdirectory include paths
 list(APPEND kinets_firmware_INCLUDES
-"${CMAKE_CURRENT_LIST_DIR}/microcli"
+"${CMAKE_CURRENT_LIST_DIR}/"
+"${CMAKE_CURRENT_LIST_DIR}/microcli/"
 )

@@ -4,24 +4,28 @@
 #include "fsl_clock.h"
 
 
-int help(void);
-int poke(void);
-int startBlinking(void);
-int stopBlinking(void);
-int ledOff(void);
-int ledOn(void);
+#define CMD_ENTRY(fn, help) {fn, #fn, help}
+
+int help(MicroCLI_t * ctx, const char * args);
+int history(MicroCLI_t * ctx, const char * args);
+int poke(MicroCLI_t * ctx, const char * args);
+int startBlinking(MicroCLI_t * ctx, const char * args);
+int stopBlinking(MicroCLI_t * ctx, const char * args);
+int ledOff(MicroCLI_t * ctx, const char * args);
+int ledOn(MicroCLI_t * ctx, const char * args);
 
 MicroCLI_t dbg;
 const MicroCLICmdEntry_t cmdTable[] = {
-    {"help",            help,           "Print this help message"},
-    {"ledOff",          ledOff,         "Turn off the LED"},
-    {"ledOn",           ledOn,          "Turn on the LED"},
-    {"poke",            poke,           "Poke the poor circuit"},
-    {"startBlinking",   startBlinking,  "Start blinking the LED"},
-    {"stopBlinking",    stopBlinking,   "Stop blinking the LED"},
+    CMD_ENTRY(help, "Print this help message"),
+    CMD_ENTRY(history, "Dump contents MicroCLI history"),
+    CMD_ENTRY(ledOff, "Turn off the LED"),
+    CMD_ENTRY(ledOn, "Turn on the LED"),
+    CMD_ENTRY(poke, "Poke the poor circuit"),
+    CMD_ENTRY(startBlinking, "Start blinking the LED"),
+    CMD_ENTRY(stopBlinking, "Stop blinking the LED"),
 };
 const MicroCLICfg_t dbgCfg = {
-    .bannerText = "\r\n\n\n\nDemo CLI!\r\n",
+    .bannerText = "\r\n\n\n\nDemo CLI!\r\n\n",
     .promptText = "> ",
     .cmdTable = cmdTable,
     .cmdCount = sizeof(cmdTable)/sizeof(cmdTable[0]),
@@ -46,37 +50,46 @@ void delay_ms(const uint32_t ms)
     }
 }
 
-int help(void)
+int help(MicroCLI_t * ctx, const char * args)
 {
     return microcli_help(&dbg);
 }
 
-int poke(void)
+int history(MicroCLI_t * ctx, const char * args)
+{
+    MicroCLIHistoryEntry_t * curr = dbg.history;
+    while(curr && curr->str) {
+        microcli_log(&dbg, "%s\n\r", curr->str);
+        curr = curr->older;
+    }
+    return 0;
+}
+
+int poke(MicroCLI_t * ctx, const char * args)
 {
     microcli_log(&dbg, "ouch!\n\r");
     return 0;
 }
 
-
-int startBlinking(void)
+int startBlinking(MicroCLI_t * ctx, const char * args)
 {
     blinkEnable = true;
     return 0;
 }
 
-int stopBlinking(void)
+int stopBlinking(MicroCLI_t * ctx, const char * args)
 {
     blinkEnable = false;
     return 0;
 }
 
-int ledOff(void)
+int ledOff(MicroCLI_t * ctx, const char * args)
 {
     board_status_led_off();
     return 0;
 }
 
-int ledOn(void)
+int ledOn(MicroCLI_t * ctx, const char * args)
 {
     board_status_led_on();
     return 0;
@@ -104,6 +117,7 @@ int main(void)
 
     microcli_init(&dbg, &dbgCfg);
     microcli_banner(&dbg);
+    microcli_interpret_string(&dbg, "help", false);
     while(1) {
         delay_ms(TICK_PERIOD_MS);
         microcli_interpreter_tick(&dbg);
