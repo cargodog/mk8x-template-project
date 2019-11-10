@@ -20,7 +20,7 @@
                     } );\
 }
 
-static GPIO_Type * get_gpio_base(PinID_t pin)
+static inline GPIO_Type * get_gpio_base(PinID_t pin)
 {
     if (defaultPinCfgs[pin].port == PORTA)
         return GPIOA;

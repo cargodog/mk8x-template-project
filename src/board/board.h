@@ -5,9 +5,9 @@
 #include <stdbool.h>
 
 
-#define DBG_LPUART LPUART0
-#define DBG_BAUDRATE 115200
-#define DBG_LPUART_CLK_FREQ CLOCK_GetFreq(kCLOCK_Osc0ErClk)
+#define DBG_LPUART              LPUART0
+#define DBG_BAUDRATE            115200
+#define DBG_LPUART_CLK_FREQ     CLOCK_GetFreq(kCLOCK_Osc0ErClk)
 
 
 // initialization

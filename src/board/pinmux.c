@@ -17,7 +17,7 @@ static void enable_port_clocks(void)
 }
 
 void initialize_pinmux(void)
-{    
+{
     enable_port_clocks();
     pinmux_apply(defaultPinCfgs, sizeof(defaultPinCfgs)/sizeof(defaultPinCfgs[0]));
 }
