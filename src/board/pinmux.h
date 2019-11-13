@@ -19,6 +19,14 @@ typedef enum {
     // Debug UART
     PIN_DBG_UART_RX,
     PIN_DBG_UART_TX,
+
+    // QSPI Flash
+    PIN_QSPI_FLASH_A_CLK,
+    PIN_QSPI_FLASH_A_CS,
+    PIN_QSPI_FLASH_A_D0,
+    PIN_QSPI_FLASH_A_D1,
+    PIN_QSPI_FLASH_A_D2,
+    PIN_QSPI_FLASH_A_D3,
     
     // NO MORE IDs BELOW HERE
     MAX_NUM_PINS

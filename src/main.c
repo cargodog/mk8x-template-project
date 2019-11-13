@@ -115,6 +115,7 @@ int main(void)
     static const int TICK_PERIOD_MS = 10;
     board_init();
 
+    // Start the CLI
     microcli_init(&dbg, &dbgCfg);
     microcli_banner(&dbg);
     microcli_interpret_string(&dbg, "help", false);

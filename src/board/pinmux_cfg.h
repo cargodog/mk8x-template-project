@@ -8,6 +8,7 @@
  * Default pinmux configuration
  */
 const PinConfig_t defaultPinCfgs[] = {
+    // LED pins
     [PIN_STATUS_LED] = { 
         .port = PORTC,
         .pin = 12U,
@@ -17,6 +18,8 @@ const PinConfig_t defaultPinCfgs[] = {
             .mux                    = kPORT_MuxAsGpio,
         }
     },
+
+    // Debug UART pins
     [PIN_DBG_UART_RX] = { 
         .port = PORTB,
         .pin = 16U,
@@ -32,6 +35,56 @@ const PinConfig_t defaultPinCfgs[] = {
         .cfg = {
             .driveStrength          = kPORT_HighDriveStrength,
             .mux                    = kPORT_MuxAlt3,
+        }
+    },
+
+    // QSPI Flash pins
+    [PIN_QSPI_FLASH_A_CLK] = { 
+        .port = PORTE,
+        .pin = 1U,
+        .cfg = {
+            .driveStrength          = kPORT_HighDriveStrength,
+            .mux                    = kPORT_MuxAlt5,
+        }
+    },
+    [PIN_QSPI_FLASH_A_CS] = { 
+        .port = PORTE,
+        .pin = 5U,
+        .cfg = {
+            .driveStrength          = kPORT_HighDriveStrength,
+            .mux                    = kPORT_MuxAlt5,
+        }
+    },
+    [PIN_QSPI_FLASH_A_D0] = { 
+        .port = PORTE,
+        .pin = 2U,
+        .cfg = {
+            .driveStrength          = kPORT_HighDriveStrength,
+            .mux                    = kPORT_MuxAlt5,
+        }
+    },
+    [PIN_QSPI_FLASH_A_D1] = { 
+        .port = PORTE,
+        .pin = 4U,
+        .cfg = {
+            .driveStrength          = kPORT_HighDriveStrength,
+            .mux                    = kPORT_MuxAlt5,
+        }
+    },
+    [PIN_QSPI_FLASH_A_D2] = { 
+        .port = PORTE,
+        .pin = 3U,
+        .cfg = {
+            .driveStrength          = kPORT_HighDriveStrength,
+            .mux                    = kPORT_MuxAlt5,
+        }
+    },
+    [PIN_QSPI_FLASH_A_D3] = { 
+        .port = PORTE,
+        .pin = 0U,
+        .cfg = {
+            .driveStrength          = kPORT_HighDriveStrength,
+            .mux                    = kPORT_MuxAlt5,
         }
     },
 };

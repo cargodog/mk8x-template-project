@@ -1,4 +1,5 @@
 #include "board.h"
+#include "qspi_flash.h"
 #include "pinmux.h"
 #include "pinmux_cfg.h"
 #include "gpio_cfg.h"
@@ -72,6 +73,7 @@ void board_init(void)
     initialize_pinmux();
     initialize_gpios();
     initialize_dbg_uart();
+    qspi_flash_init();
 }
 
 void board_gpio_set(PinID_t pin)
