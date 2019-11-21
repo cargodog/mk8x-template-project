@@ -5,6 +5,7 @@ include("${CMAKE_CURRENT_LIST_DIR}/board/CMakeLists.txt")
 list(APPEND kinets_firmware_SOURCES
 "${CMAKE_CURRENT_LIST_DIR}/assert.c"
 "${CMAKE_CURRENT_LIST_DIR}/main.c"
+"${CMAKE_CURRENT_LIST_DIR}/timer_utils.c"
 "${CMAKE_CURRENT_LIST_DIR}/startup_MK82F25615.S"
 )
 
