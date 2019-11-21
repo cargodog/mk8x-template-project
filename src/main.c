@@ -2,6 +2,7 @@
 #include "printf.h"
 #include "microcli.h"
 #include "timer_utils.h"
+#include "led_blink.h"
 
 
 #define CMD_ENTRY(fn, help) {fn, #fn, help}
@@ -9,16 +10,16 @@
 int help(MicroCLI_t * ctx, const char * args);
 int ledOff(MicroCLI_t * ctx, const char * args);
 int ledOn(MicroCLI_t * ctx, const char * args);
-int startBlinking(MicroCLI_t * ctx, const char * args);
-int stopBlinking(MicroCLI_t * ctx, const char * args);
+int startBlink(MicroCLI_t * ctx, const char * args) {blink_enable(); return 0;}
+int stopBlink(MicroCLI_t * ctx, const char * args) {blink_disable(); return 0;}
 
 MicroCLI_t dbg;
 const MicroCLICmdEntry_t cmdTable[] = {
     CMD_ENTRY(help,             "Print this help message"),
     CMD_ENTRY(ledOff,           "Turn off the LED"),
     CMD_ENTRY(ledOn,            "Turn on the LED"),
-    CMD_ENTRY(startBlinking,    "Start blinking the LED"),
-    CMD_ENTRY(stopBlinking,     "Stop blinking the LED"),
+    CMD_ENTRY(startBlink,       "Start blinking the LED"),
+    CMD_ENTRY(stopBlink,        "Stop blinking the LED"),
 };
 const MicroCLICfg_t dbgCfg = {
     .bannerText = "\r\n\n\n\nDemo CLI!\r\n\n",
@@ -28,7 +29,6 @@ const MicroCLICfg_t dbgCfg = {
     .io.printf = printf,
     .io.getchar = board_dbg_uart_getchar_non_blocking,
 };
-bool blinkEnable = true;
 
 
 int help(MicroCLI_t * ctx, const char * args)
@@ -46,33 +46,6 @@ int ledOn(MicroCLI_t * ctx, const char * args)
 {
     board_status_led_on();
     return 0;
-}
-
-int startBlinking(MicroCLI_t * ctx, const char * args)
-{
-    blinkEnable = true;
-    return 0;
-}
-
-int stopBlinking(MicroCLI_t * ctx, const char * args)
-{
-    blinkEnable = false;
-    return 0;
-}
-
-void blink_tick(int ms)
-{
-    static const int BLINK_PERIOD_MS = 1000;
-    static int msCounter = 0;
-
-    assert(ms > 0);
-
-    msCounter += ms;
-
-    if(msCounter > BLINK_PERIOD_MS && blinkEnable == true) {
-        board_status_led_toggle();
-        msCounter = 0;
-    }
 }
 
 int main(void)
